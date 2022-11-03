@@ -25,6 +25,11 @@
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": ".husky/pre-commit"
+    }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
