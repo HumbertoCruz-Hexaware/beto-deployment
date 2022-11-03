@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-PROTECTED_BRANCHES="^(master|develop)"
 branch="$(git rev-parse --abbrev-ref HEAD)"
-if [ "$branch" = $PROTECTED_BRANCHES  ]; then
-  echo "You can't commit directly to main/master branch"
+
+if [ "$branch" = "main" ]; then
+  echo "You can't commit directly to main branch"
   exit 1
 fi
 
