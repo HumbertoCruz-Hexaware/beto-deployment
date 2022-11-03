@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+branch="$(git rev-parse --abbrev-ref HEAD)"
 if [ "$branch" = "master" or "$branch" = "main"]; then
   echo "You can't commit directly to master branch"
   exit 1
@@ -9,5 +10,5 @@ fi
 npm run lint
 npm run test
 
-branch="$(git rev-parse --abbrev-ref HEAD)"
+
 
