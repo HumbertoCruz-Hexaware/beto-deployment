@@ -3,7 +3,7 @@
 
 PROTECTED_BRANCHES="^(master|develop)"
 branch="$(git rev-parse --abbrev-ref HEAD)"
-if [ "$branch" =~ $PROTECTED_BRANCHES ]; then
+if [ "$branch" = $PROTECTED_BRANCHES ]; then
   echo "You can't push directly to main/master branch"
   exit 1
 fi
