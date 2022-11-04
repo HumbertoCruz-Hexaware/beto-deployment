@@ -18,32 +18,14 @@ jobs:
         run: npm run lint
       - name: Test coverage
         run: npm run test
-  build:
-    needs: test-code
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: CI=false npm run build
-      - name: Run test
-        run: npm run test
-      - name: Upload page artifact
-        uses: actions/upload-pages-artifact@v1.0.4
-        with:
-          path: "./build"
+
   deploy:
-    needs: build
+    needs: test-code
     name: "Deploy to QA"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: jsmrcaga/action-netlify-deploy@master
+      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
-          build_directory: ./build
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
