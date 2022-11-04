@@ -19,7 +19,7 @@ jobs:
       - name: Test coverage
         run: npm run test
   build:
-  needs: test-code 
+    needs: test-code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
