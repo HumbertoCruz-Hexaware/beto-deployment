@@ -18,6 +18,8 @@ jobs:
         run: npm run lint
       - name: Test coverage
         run: npm run test
+      - name: Change Home Page
+        run: npm run cHP
 
   deploy:
     needs: test-code
