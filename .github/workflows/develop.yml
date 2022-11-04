@@ -19,7 +19,7 @@ jobs:
       - name: Test coverage
         run: npm run test
       - name: Change Home Page
-        run: npm run cHP
+        run: node changeHP.js
 
   deploy:
     needs: test-code
