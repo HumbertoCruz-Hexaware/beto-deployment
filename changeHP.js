@@ -4,7 +4,9 @@ const file = require(fileName);
 
 //file.key = "new value";
 console.log(file.homepage);
-file.homepage = "humberto-site.netlify.app";
+file.homepage = "./";
+console.log(file.homepage);
+console.log(file.name);
 if (file.hasOwnProperty("homepage")) {
   file.homepage = "humberto-site.netlify.app";
 }
