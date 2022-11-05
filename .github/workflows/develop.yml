@@ -18,21 +18,18 @@ jobs:
         run: npm run lint
       - name: Test coverage
         run: npm run test
-      
 
   deploy:
     needs: test-code
     name: "Deploy to QA"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      with:
-        node-version: "16"
-      
+        with:
+          node-version: "16"
       - name: Install dependencies
         run: npm install
-      
       - name: Change Home Page
         run: node changeHP.js
 
