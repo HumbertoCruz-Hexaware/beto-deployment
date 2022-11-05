@@ -18,8 +18,7 @@ jobs:
         run: npm run lint
       - name: Test coverage
         run: npm run test
-      - name: Change Home Page
-        run: node changeHP.js
+      
 
   deploy:
     needs: test-code
@@ -27,8 +26,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
-        with:
-          install_command: npm run build
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: actions/setup-node@v3
+      with:
+        node-version: "16"
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Change Home Page
+        run: node changeHP.js
+
+      - name: Build
+        run: CI=false npm run build
+
+      - name: deploy to qa
+        run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}
