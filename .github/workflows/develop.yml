@@ -29,5 +29,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
+          install_command: npm run build
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
