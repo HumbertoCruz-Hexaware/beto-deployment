@@ -42,14 +42,13 @@ jobs:
 
   PullRequest:
     needs: deploy
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3.10.1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: Auto Pull Request
-        title: Your desired title
-        body: Auto-created Pull Request
-        branch: ${{ github.ref }} # The branch where you commit
-        base: main # Don't forget to specify the right base branch here
-
+    name: Create Pull Request
+    uses: peter-evans/create-pull-request@v3.10.1
+    with:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      commit-message: Auto Pull Request
+      title: Your desired title
+      body: Auto-created Pull Request
+      branch: ${{ github.ref }} # The branch where you commit
+      base: main # Don't forget to specify the right base branch here
 
