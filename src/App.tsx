@@ -8,6 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Humberto Cruz Sanabria</p>
+        <p>Hello there, from blad</p>
         <a
           className="App-link"
           href="https://reactjs.org"
