@@ -40,15 +40,13 @@ jobs:
       - name: deploy to qa
         run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }} --dir=./build
 
-  PullRequest:
-    needs: deploy
-    name: Create Pull Request
-    uses: peter-evans/create-pull-request@v3.10.1
-    with:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      commit-message: Auto Pull Request
-      title: Your desired title
-      body: Auto-created Pull Request
-      branch: ${{ github.ref }} # The branch where you commit
-      base: main # Don't forget to specify the right base branch here
-
+  action-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@v0.5.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          title: Automatic pull request
