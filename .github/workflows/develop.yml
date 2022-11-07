@@ -54,6 +54,6 @@ jobs:
         uses: ypicard/get-branch-name-github-action@v1
 
       - name: pull-request
-        run: gh pr create --base main --head ${{ steps.get-branch.outputs.branch }}
+        run: gh pr create --base main --head ${{ steps.get-branch.outputs.branch }} --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
