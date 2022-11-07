@@ -46,8 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Create Pr
-        uses: medlypharmcy/create-pr-action@main
+        uses: medlypharmacy/create-pr-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_BRANCH: ${GITHUB_REF##*/}
