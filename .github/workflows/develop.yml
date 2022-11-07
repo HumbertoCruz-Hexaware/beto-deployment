@@ -44,7 +44,7 @@ jobs:
     needs: deploy
     name: "Create pull request"
     runs-on: ubuntu-latest
-    steps
+    steps:
       - name: create pull request
         run: gh pr create -B main -H develop/change-name --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
         env:
