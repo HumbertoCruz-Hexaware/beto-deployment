@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - main
+      - master
 jobs:
   test-code:
     name: "validate code"
@@ -38,3 +39,16 @@ jobs:
 
       - name: deploy to qa
         run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }} --dir=./build
+
+  PullRequest:
+    needs: deploy
+    name: "Create pull request"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Pr
+        uses: medlypharmcy/create-pr-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_BRANCH: ${GITHUB_REF##*/}
+          BASE_BRANCH: main
