@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - main
+      - master
 jobs:
   test-code:
     name: "validate code"
@@ -38,3 +39,21 @@ jobs:
 
       - name: deploy to qa
         run: netlify deploy --prod --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }} --dir=./build
+
+  action-pull-request:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Get branch Name
+        id: get-branch
+        uses: ypicard/get-branch-name-github-action@v1
+
+      - name: pull-request
+        run: gh pr create --base main --head ${{ steps.get-branch.outputs.branch }} --title "Pulling ${{ steps.get-branch.outputs.branch }} into main" --body "Automated PR"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
